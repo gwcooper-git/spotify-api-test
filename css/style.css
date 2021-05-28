@@ -1,8 +1,3 @@
-div[id*='ytsubscribe'] {
-  position: absolute;
-  top: 85%; left: 85%;
-}
-
 /* Have a Spotify Themed Background */
 body{
     background-image: url("../img/spotify.jpg");
