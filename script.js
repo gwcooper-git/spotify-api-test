@@ -41,7 +41,7 @@ $( document ).ready(function() {
       // Make Spotify API call
       // Note: We are using the track API endpoint.
       $.ajax({
-        url: `https://api.spotify.com/v1/search?q=${search_query}&type=track`,
+        url: `https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=50`,
         type: 'GET',
         headers: {
             'Authorization' : 'Bearer ' + accessToken
