@@ -51,13 +51,13 @@ $( document ).ready(function() {
           let num_of_tracks = data.tracks.items.length;
           let count = 0;
           // Max number of songs is 12
-          const max_songs = 12;
+          const max_songs = 50;
           while(count < max_songs && count < num_of_tracks){
             // Extract the id of the FIRST song from the data object
-            let id = data.tracks.items[count].id;
+            let id = data.name.items[count].id;
             // Constructing two different iframes to embed the song
             let src_str = `https://open.spotify.com/embed/track/${id}`;
-            let iframe = `<div class='song'><iframe src=${src_str} frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div>`;
+            let iframe = `<div class='artist'><iframe src=${src_str} frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div>`;
             let parent_div = $('#song_'+ count);
             parent_div.html(iframe);
             count++;
