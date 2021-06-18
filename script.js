@@ -18,14 +18,41 @@ $( document ).ready(function() {
 
     // Get Access Token
     const accessToken = getUrlParameter('access_token');
-
+ 
+     
     // AUTHORIZE with Spotify (if needed)
     // *************** REPLACE THESE VALUES! *************************
     let client_id = '9c2a891ca1744574b981ec034c36daea';
     // Use the following site to convert your regular url to the encoded version:
     // https://www.url-encode-decode.com/
     let redirect_uri = 'https%3A%2F%2Fgwcooper-git.github.io%2Fspotify-api-test'; // GitHub Pages URL or whatever your public url to this app is
-    // *************** END *************************
+         // Code from other script
+     
+     var stateKey = 'spotify_auth_state';
+
+var app = express();
+
+app.use(express.static(__dirname + '/public'))
+   .use(cors())
+   .use(cookieParser());
+
+app.get('/login', function(req, res) {
+
+  var state = generateRandomString(16);
+  res.cookie(stateKey, state);
+  // your application requests authorization
+  var scope = 'user-top-read';
+  res.redirect('https://accounts.spotify.com/authorize?' +
+    querystring.stringify({
+      response_type: 'code',
+      client_id: client_id,
+      scope: scope,
+      redirect_uri: redirect_uri,
+      state: state
+    }));
+});
+
+     // *************** END *************************
 
     const redirect = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&redirect_uri=${redirect_uri}`;
     // Don't authorize if we have an access token already
